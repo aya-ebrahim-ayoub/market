@@ -103,15 +103,15 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <div className="min-h-screen bg-white flex flex-col font-medium selection:bg-cyan-100 selection:text-cyan-900">
       <Navbar toggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)} />
       
-      <div className="flex flex-1 overflow-hidden">
-        <aside className={`fixed inset-y-0 left-0 z-30 w-72 bg-white border-r border-slate-100 transform lg:translate-x-0 transition-transform duration-500 lg:static ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className="flex flex-1 overflow-hidden relative">
+        <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-100 transform lg:translate-x-0 transition-transform duration-500 lg:static ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="flex flex-col h-full py-8">
             <div className="px-8 mb-8 flex items-center justify-between">
               <span className="font-black text-xs uppercase tracking-[0.2em] text-slate-400">Main Menu</span>
-              <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden"><X size={20} /></button>
+              <button onClick={() => setMobileMenuOpen(false)} className="lg:hidden p-2 text-slate-400 hover:text-slate-900"><X size={20} /></button>
             </div>
 
-            <div className="flex-1 px-4 space-y-1.5">
+            <div className="flex-1 px-4 space-y-1.5 overflow-y-auto">
               <SidebarLink to="/" label="Home Feed" icon={<Home size={20} />} active={location.pathname === '/'} onClick={() => setMobileMenuOpen(false)} />
               <SidebarLink to="/orders" label="My Orders" icon={<ClipboardList size={20} />} active={location.pathname === '/orders'} onClick={() => setMobileMenuOpen(false)} />
               
@@ -119,7 +119,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 <div className="pt-6 mt-6 border-t border-slate-100 space-y-1.5">
                   <span className="px-4 text-[10px] font-black uppercase tracking-widest text-cyan-600 block mb-2">Vendor Panel</span>
                   <SidebarLink to="/vendor" label="Analytics" icon={<LayoutDashboard size={20} />} active={location.pathname === '/vendor'} onClick={() => setMobileMenuOpen(false)} />
-                  <SidebarLink to="/vendor/products" label="Inventory" icon={<Package size={20} />} active={location.pathname === '/vendor/products'} onClick={() => setMobileMenuOpen(false)} />
+                  <SidebarLink to="/vendor/products" label="Inventory" icon={<Package size={20} />} active={location.pathname.startsWith('/vendor/products')} onClick={() => setMobileMenuOpen(false)} />
                 </div>
               )}
 
@@ -140,21 +140,19 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
         </aside>
 
-        <div className="flex-1 flex flex-col h-screen overflow-hidden">
-          <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50/50">
-            <div className="max-w-6xl mx-auto min-h-full">
+        <div className="flex-1 overflow-y-auto h-[calc(100vh-80px)] bg-slate-50/50">
+          <main className="p-4 sm:p-8">
+            <div className="max-w-6xl mx-auto min-h-[60vh]">
               {children}
             </div>
-            <div className="mt-20">
-              <Footer />
-            </div>
           </main>
+          <Footer />
         </div>
       </div>
 
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-20 lg:hidden transition-opacity"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden transition-opacity"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}

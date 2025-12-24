@@ -51,7 +51,8 @@ export const AdminDashboard: React.FC = () => {
           <Card key={i} className="p-6">
             <div className="flex items-center gap-4">
               <div className={`p-4 rounded-2xl bg-slate-50 ${kpi.color}`}>
-                {React.cloneElement(kpi.icon as React.ReactElement, { size: 24 })}
+                {/* Fix: cast to React.ReactElement<any> to resolve type error for 'size' prop */}
+                {React.cloneElement(kpi.icon as React.ReactElement<any>, { size: 24 })}
               </div>
               <div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{kpi.label}</p>

@@ -118,7 +118,8 @@ export const VendorDashboard: React.FC = () => {
           <Card key={i} className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div className={`p-3 rounded-2xl text-white ${stat.color} shadow-lg shadow-black/5`}>
-                {React.cloneElement(stat.icon as React.ReactElement, { size: 24 })}
+                {/* Fix: cast to React.ReactElement<any> to resolve type error for 'size' prop */}
+                {React.cloneElement(stat.icon as React.ReactElement<any>, { size: 24 })}
               </div>
               <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg uppercase tracking-widest">{stat.trend}</span>
             </div>
