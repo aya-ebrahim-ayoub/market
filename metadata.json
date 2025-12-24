@@ -1,0 +1,7 @@
+{
+  "name": "SwiftMarket - Multi-Vendor Marketplace",
+  "description": "A high-performance, modern multi-vendor marketplace platform featuring customer, vendor, and admin perspectives with integrated analytics and AI-powered product assistance.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
